@@ -70,12 +70,16 @@ $= \underset{\alpha_{1:n}}{\operatorname{argmin}} \sum \limits_{i=1}^n (\sum \li
 $= \underset{\alpha_{1:n}}{\operatorname{argmin}} \sum \limits_{i=1}^n (\alpha^T K_i - y_i)^2 + \lambda \alpha^T K \alpha$\\
 $= \underset{\alpha}{\operatorname{argmin}} ||\alpha^T K -y||_2^2 + \lambda \alpha^T K \alpha$\\
 Closed form: $\alpha^* = (K+\lambda I)^{-1} y$\\
-Prediction: $y^*= w^*^T x = \sum \limits_{i=1}^n \alpha_i^* k(x_i,x)$
+Prediction: $y^*= w^{*T} x = \sum \limits_{i=1}^n \alpha_i^* k(x_i,x)$
 
 \section*{Feature Selection}
 \subsection*{Lasso regression}
-$w^* = $\underset{w}{\operatorname{argmin}} \sum \limits_{i=1}^n (y_i - w^Tx_i)^2 + \lambda ||w||_1$\\
+$w^* = \underset{w}{\operatorname{argmin}} \sum \limits_{i=1}^n (y_i - w^Tx_i)^2 + \lambda ||w||_1$\\
 The alternative penalty encourages coefficients to be exactly 0 (automatic feature selection).
 
 \subsection*{Sparse L1-SVM}
 $\underset{w}{\operatorname{argmin}} \sum \limits_{i=1}^n \max (0, 1-y_i w^T x_i) + \lambda ||w||_1$
+
+\subsection*{PCA}
+$\Sigma = \frac{1}{n}\sum_{i=1}^n x_i*x_i^T$
+solution to PCA problem $(W,z_i)=\operatorname{argmin}\sum_{i=1}^n ||Wz_i-x_i||_2^2$ ($W\in \mathbb{R}^{d \times k}, z_i\in \mathbb{R}^k$) is $W = (v_1|...|v_k)$, $v_i$ ev. of $\Sigma$ and $z_i = W^Tx_i$

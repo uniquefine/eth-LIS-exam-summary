@@ -1,0 +1,28 @@
+% -*- root: Main.tex -*-
+\section*{Missing data (latent vars)}
+\subsection*{EM algo (Gaussian)}
+assume $p(\vec{x}|\vec{\theta
+})=\sum_{j=1}^m \pi_j N(\vec{x}; \vec{\mu}_j, \vec{\Sigma}_j);
+(\sum_j \pi_j = 1)$
+introduce latent vars $z_i\in[m]$ (unknown labels). now joint
+$\ell_c(\theta)=\sum_i \log p(z_i,\vec{x}_i|\theta)$
+is to be optimized.
+
+\subsection*{Hard-EM}
+set $z_i^{(t)} = \underset{z}{\operatorname{argmax}}p(z_i|x_i, \theta^{(t-1)}) = \underset{z}{\operatorname{argmax}}p(z_i|\theta^{(t-1)}p(\vec{x}_i|z_i, \theta^{(t-1)})$ 
+Now we have complete data -> find $\theta^{(t)} = \underset{\theta}{\operatorname{argmax}}p(x_{1:n},z_{1:n}|\theta)$
+as for the Gaussian Bayes Classifier
+
+\subsection*{Soft-EM algorithm}
+Given $p(\vec{x}|z,\Sigma,\mu), p(z | \vec{\pi}$\\
+E-step: calculate responsibilities \\
+$\gamma_j^{(t)}(x_i) = p(z_i = j|\vec{x_i};\Sigma,\mu)=\frac{\pi_j p(\vec{x}|\Sigma_j, \mu_j)}{\sum_{l=1}^m \pi_l p(\vec{x}|\Sigma_l, \mu_l}$\\
+
+M-step: Now we optimize $\ell_c$ but since $z_i$ are not available instead we optimize\\
+$E[\ell_c(\mu,\Sigma)|\vec{x},\mu^{(t-1)},\Sigma^{(t-1)}] \\
+= \sum_i \sum_j \gamma_j(\vec{x}_i) \log(p(\vec{x}_i|z_i=j, \mu_j, \Sigma_j))$\\
+To get $\mu^{(t)}, \Sigma^{(t)}$ \\
+If $p(\vec{x}|z=j, \mu_j, \Sigma_j)$ is Gaussian we get\\
+$\pi_j^{(t)} = \frac{1}{n} \sum_{i=1}^n \gamma_j^{(t)} (x_i)$\\
+$\mu_j^{(t)} = \frac{\sum_{i=1}^n \gamma_j^{(t)} (x_i) x_i}{\sum_{i=1}^n \gamma_j^{(t)} (x_i)}$\\
+$\Sigma_j^{(t)} = \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i) (x_i - \mu_j^{(t)}) (x_i - \mu_j^{(t)})^T}{\sum_{i=1}^n \gamma_j^{(t)}(x_i)}$

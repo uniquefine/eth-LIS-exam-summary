@@ -14,31 +14,30 @@ Typical approach:
 Want: $p = P(Y=1), P(y=-1) = 1-p$\\
 Given: $D=\{(y_1,x_1),...,(y_n,x_n)\}, D_y=\{y_1,...,y_n\}$\\
 $P(D_y|p) = \prod_{i=1}^n p^{[y_i=+1]} (1-p)^{[y_i=-1]}$\\
-$=p^{n_+} (1-p)^{n_-}$ where $n_+ = $ # of $y=+1$\\
+$=p^{n_+} (1-p)^{n_-}$ where $n_+ = $ \# of $y=+1$\\
 $\frac{\partial}{\partial p} log P(D_y|p) = n_+ \frac{1}{p} - n_- \frac{1}{1-p} \overset{!}{=} 0 \Rightarrow p=\frac{n_+}{n_+ + n_-}$
 
-\subsection*{Example MLE for P=(x|y)}
+\subsection*{Example MLE for P=(x|y) \\ (Gaussian Naive Bayes Classifier)}
 Assume: $P(X=x_i|y) = \mathcal{N}(x_i;\mu_{i,y}, \sigma_{i,y}^2)$\\
 Given: $D, D_{x_i|y} = \{x \text{, s.t. } x_{j,i}=x, y_i=y\}$\\
-Thus MLE yields:\\
-$\mu_{i,y} = \frac{1}{n_y} \sum_{x\in D_{x_i|y}} x$, where $n_y=|D_{x_i|y}|$\\
-$\sigma_{i,y}^2 = \frac{1}{n_y} \sum_{x\in D_{x_i|y}} (x-\mu_{i,y})^2$
+Then MLE yields:\\
+$\mu_{i,y} = \frac{1}{\text{count}(Y=y)} \sum_{x\in D_{x_i|y}} x$\\
+$\sigma_{i,y}^2 = \frac{1}{\text{count}(Y=y)} \sum_{x\in D_{x_i|y}} (x-\mu_{i,y})^2$
 
 \subsection*{Deriving decision rule}
 In order to predict label y for new point x, use\\
 $P(y|x) = \frac{1}{Z} P(y)P(x|y)$\\
 $y = \underset{y}{\operatorname{argmax}} P(y|x)$\\
 $= \underset{y}{\operatorname{argmax}} P(y) \prod_{i=1}^d P(x_i|y)$\\
-$= \underset{y}{\operatorname{argmax}} log P(y) + \sum_{i=1}^d log P(x_i|y)$
 
-\subsection*{Example: Gaussian Naive Bayes classifier}
-MLE for class prior: $P(Y=y) = p_y = \frac{\operatorname{Count(Y = y)}}{n}$\\
-MLE for feature distribution: $P(X_1,...,X_d|Y) = \prod_{i=1}^d P(X_i|Y) = \mathcal{N}(x_i|\mu_{y,i}, \sigma_{y,i}^2)$\\
-$\mu_{y,i} = \frac{1}{\operatorname{Count}(Y=y)} \sum_{j:y_j=y} x_j,i$\\
-$\sigma_{y,i}^2 = \frac{1}{\operatorname{Count}(Y=y)} \sum_{j:y_j=y} (x_{j,i} - \mu_{y,i})^2$\\
-Prediction given new point\\
-$y = \underset{y}{\operatorname{argmax}} P(y|x) = \underset{y}{\operatorname{argmax}} P(y) \prod_{i=1}^d P(x|y)$
-
+%\subsection*{Example: Gaussian Naive Bayes classifier}
+%MLE for class prior: $P(Y=y) = p_y = \frac{\operatorname{Count(Y = y)}}{n}$\\
+%MLE for feature distribution: $P(X_1,...,X_d|Y) = \prod_{i=1}^d P(X_i|Y) = \mathcal{N}(x_i|\mu_{y,i}, \sigma_{y,i}^2)$\\
+%$\mu_{y,i} = \frac{1}{\operatorname{Count}(Y=y)} \sum_{j:y_j=y} x_j,i$\\
+%$\sigma_{y,i}^2 = \frac{1}{\operatorname{Count}(Y=y)} \sum_{j:y_j=y} (x_{j,i} - \mu_{y,i})^2$\\
+%Prediction given new point\\
+%$y = \underset{y}{\operatorname{argmax}} P(y|x) = \underset{y}{\operatorname{argmax}} P(y) \prod_{i=1}^d P(x|y)$
+%
 \subsection*{Example: Gaussian Bayes Classifier}
 MLE for class prior: $P(Y=y) = p_y = \frac{\operatorname{Count(Y = y)}}{n}$\\
 MLE for feature distribution: $P(x|Y) = \mathcal{N}(x ; \mu_y \Sigma_y)$

@@ -41,11 +41,10 @@ Link function: $\sigma(w^Tx) = \frac{1}{1+exp(-w^Tx)}$\\
 Derivate: $\frac{\partial}{\partial z} \sigma(z) = \sigma(z)(1-\sigma(z))$\\
 Logistic regression replaces the assumption of Gaussian noise by iid Bernoulli noise.\\
 $P(y|x,w) = Ber(y; \sigma(w^Tx))$\\
-$= \left \{
-	\begin{array}{lr}
-		$1/(1+exp(-w^Tx)) = \sigma(w^T x)$\\
-		$1 - 1/(1+exp(-w^Tx)) = \sigma (-w^T x)$\\
-	\end{array}
+$= \begin{cases} 
+		\sigma(w^T x) & \text{if } y = 1\\
+		1-\sigma (w^T x)=\sigma (-w^Tx) & \text{if } y = -1\\
+		\end{cases}
 $\\
 Learning: $w = \underset{w}{\operatorname{argmax}} P(w|x,y)$\\
 Classification: Use $P(y|x,w) = \frac{1}{1+exp(-yw^Tx)}$ and predict most likely class label.
@@ -54,11 +53,11 @@ Classification: Use $P(y|x,w) = \frac{1}{1+exp(-yw^Tx)}$ and predict most likely
 $\underset{w}{\operatorname{argmax}} P(y|x,w) = \underset{w}{\operatorname{argmin}} - \sum_{i=1}^n log P(y|x_i,w)$\\
 $\underset{w}{\operatorname{argmin}} \sum_{i=1}^n log(1+exp(-yw^Tx_i))$
 
-\subsection*{Gradient for logistic regression}
-Loss function $l(w) = log(1+exp(-yw^Tx))$\\
-$\nabla_w l(w) = \frac{1}{1+exp(-yw^Tx)} exp(-yw^Tx) (-yx)$\\
-$=\frac{1}{1+exp(+yw^Tx)} (-yx)$\\
-$=P(-y|x,w) (-yx)$
+%\subsection*{Gradient for logistic regression}
+%Loss function $l(w) = log(1+exp(-yw^Tx))$\\
+%$\nabla_w l(w) = \frac{1}{1+exp(-yw^Tx)} exp(-yw^Tx) (-yx)$\\
+%$=\frac{1}{1+exp(+yw^Tx)} (-yx)$\\
+%$=P(-y|x,w) (-yx)$
 
 \subsection*{SGD for logistic regression}
 1. Initialize w\\

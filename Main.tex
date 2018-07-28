@@ -15,8 +15,8 @@
 
 \let\bar\overline
 
-\definecolor{myblue}{cmyk}{1,.72,0,.38}
-\definecolor{myorange}{cmyk}{0,0.5,1,0}
+\definecolor{myblue}{HTML}{8b0000}
+\definecolor{myorange}{HTML}{008b8b}
 
 \pgfdeclarelayer{background}
 \pgfsetlayers{background,main}
@@ -45,12 +45,12 @@ Daniel Yu,~page~\thepage~of~2
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
                                 {.2ex}%
                                 {.2ex}%x
-                                {\color{myorange}\sffamily\small\bfseries}}
+                                {\color{myorange}\sffamily\bfseries}}
 \renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
                                 {.2ex}%
                                 {.2ex}%x
                                 {\sffamily\bfseries}}
-
+\renewcommand{\vec}[1]{\mathbf{#1}}
 
 \makeatother
 \setlength{\parindent}{0pt}
@@ -62,10 +62,10 @@ Daniel Yu,~page~\thepage~of~2
 \input{2Classification}
 \input{3Kernels}
 \input{4NeuralNetworks}
-\input{ProbabilityModeling}
-\input{DecisionTheory}
-\input{Generative}
-\input{Latent}
-\input{Timeseries}
+\input{5ProbabilityModeling}
+\input{6DecisionTheory}
+\input{7Generative}
+\input{8Latent}
+%\input{9Timeseries}
 \end{multicols*}
 \end{document}

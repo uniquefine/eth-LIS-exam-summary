@@ -1,5 +1,7 @@
+# About
+
 My cheatsheet for the exam "Introduction to machine Learning". 
-This is a fork of the great cheat by plokchen, thanks a lot man.
+This is a fork of the great cheatsheet by plokchen, thanks a lot man.
 I will make some changes to reflect the changes to the course.
 
 # Status
